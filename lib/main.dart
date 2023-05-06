@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:provider/provider.dart';
 import 'package:untitled1/providers/highlights_provider.dart';
+import 'package:untitled1/screens/Live_Match_Page.dart';
 import 'package:untitled1/screens/auth_screen.dart';
 import 'package:untitled1/screens/highlights_screen.dart';
 import 'package:untitled1/screens/home_screen.dart';
@@ -31,18 +32,19 @@ class MyApp extends StatelessWidget {
                 bodyMedium: TextStyle(
                     fontFamily: "Montserrat-Medium",
                     color: Globals.colorGreen,
-                    fontSize: 12,fontWeight: FontWeight.bold),
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold),
                 titleLarge: TextStyle(
                     fontFamily: "Montserrat-ExtraBold",
                     color: Globals.colorGreen,
-                    fontSize: 18)
-            ),
+                    fontSize: 18)),
             primarySwatch: Colors.blue,
           ),
           routes: {
             HighlightsScreen.routeName: (context) => HighlightsScreen(),
             HomeScreen.routeName: (context) => HomeScreen(),
-            LoginSignupPage.routeName: (context) =>LoginSignupPage()
+            LoginSignupPage.routeName: (context) => LoginSignupPage(),
+            LiveMatchPage.routeName: (context) => const LiveMatchPage()
           },
           home: const HomeScreen()),
     );

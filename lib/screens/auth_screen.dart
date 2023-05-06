@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../constants.dart';
-class LoginSignupPage extends StatefulWidget {
 
+class LoginSignupPage extends StatefulWidget {
   static const routeName = "/auth_screen";
 
   @override
@@ -39,9 +39,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       height: 40,
       width: MediaQuery.of(context).size.width * 0.8,
       child: ElevatedButton(
-        onPressed: _isLogin
-            ? null
-            : null,
+        onPressed: _isLogin ? null : null,
         style: ElevatedButton.styleFrom(
             primary: Globals.colorGreen,
             shape: const RoundedRectangleBorder(
@@ -49,7 +47,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         child: Text(
           _isLogin ? "Login" : "Register",
           style: const TextStyle(
-              fontSize: 18, color: Globals.colorGreen, fontFamily: 'Montserrat-SemiBold'),
+              fontSize: 18,
+              color: Globals.colorGreen,
+              fontFamily: 'Montserrat-SemiBold'),
         ),
       ),
     );
@@ -69,7 +69,8 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         _isLogin
             ? "Don't have account? Register Instead"
             : "Have account? Login Instead.",
-        style: const TextStyle(color: Globals.colorRed,fontFamily: 'Montserrat-SemiBold'),
+        style: const TextStyle(
+            color: Globals.colorRed, fontFamily: 'Montserrat-SemiBold'),
       ),
     );
   }
@@ -83,9 +84,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           filled: true,
           fillColor: Colors.white,
           contentPadding:
-          const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+              const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
           focusedBorder: OutlineInputBorder(
-            borderSide: new BorderSide(color: Theme.of(context).primaryColor),
+            borderSide: BorderSide(color: Theme.of(context).primaryColor),
             borderRadius: new BorderRadius.circular(10),
           ),
           enabledBorder: UnderlineInputBorder(
@@ -105,7 +106,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           filled: true,
           fillColor: Colors.white,
           contentPadding:
-          const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+              const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
           focusedBorder: OutlineInputBorder(
             borderSide: new BorderSide(color: Theme.of(context).primaryColor),
             borderRadius: new BorderRadius.circular(10),
@@ -127,7 +128,7 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           hintText: 'Email',
           enabled: true,
           contentPadding:
-          const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+              const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
           focusedBorder: OutlineInputBorder(
             borderSide: new BorderSide(color: Theme.of(context).primaryColor),
             borderRadius: new BorderRadius.circular(10),
@@ -148,13 +149,13 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
           suffixIconColor: Theme.of(context).primaryColor,
           suffixIcon: IconButton(
               onPressed: () => setState(() {
-                _isObscure = !_isObscure;
-              }),
+                    _isObscure = !_isObscure;
+                  }),
               icon: Icon(_isObscure ? Icons.visibility : Icons.visibility_off)),
           hintText: 'Password',
           enabled: true,
           contentPadding:
-          const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
+              const EdgeInsets.only(left: 14.0, bottom: 8.0, top: 8.0),
           focusedBorder: OutlineInputBorder(
             borderSide: new BorderSide(color: Theme.of(context).primaryColor),
             borderRadius: new BorderRadius.circular(10),
@@ -181,11 +182,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     return Column(
       children: [
         _nameTextField(),
-        SizedBox(height: 3),
+        const SizedBox(height: 3),
         _phoneTextField(),
-        SizedBox(height: 3),
+        const SizedBox(height: 3),
         _emailTextField(),
-        SizedBox(height: 3),
+        const SizedBox(height: 3),
         _passwordTextField()
       ],
     );
@@ -208,16 +209,21 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            const Text("Hello There, \n Welcome to BCB Live ",textAlign: TextAlign.center,
+            const Text(
+              "Hello There, \n Welcome to BCB Live ",
+              textAlign: TextAlign.center,
               style: TextStyle(
                   fontFamily: "Montserrat-ExtraBold",
                   color: Globals.colorGreen,
-                  fontSize: 32),),
-            const Text("Login / Register",
-                style: TextStyle(
-                    fontFamily: "Montserrat-ExtraBold",
-                    color: Globals.colorGreen,
-                    fontSize: 18),),
+                  fontSize: 32),
+            ),
+            const Text(
+              "Login / Register",
+              style: TextStyle(
+                  fontFamily: "Montserrat-ExtraBold",
+                  color: Globals.colorGreen,
+                  fontSize: 18),
+            ),
             SizedBox(height: 15),
             _isLogin ? _loginTextFields() : _signupTextFields(),
             _errorMessage(),
