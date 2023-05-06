@@ -1,4 +1,5 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shimmer/shimmer.dart';
@@ -75,182 +76,199 @@ class HomeScreen extends StatelessWidget {
         backgroundColor: Colors.white,
       ),
       drawer: DrawerWidget(),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                CarouselSlider(
-                  options: CarouselOptions(
-                    height: 200.0,
-                    autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 3),
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayCurve: Curves.fastOutSlowIn,
-                    enlargeCenterPage: true,
-                  ),
-                  items: imageListOfBanner.map((i) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.symmetric(
-                              horizontal: 5.0, vertical: 5),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Image.asset(
-                              i,
-                              fit: BoxFit.cover,
+      body: Entry(
+        opacity: .2,
+        delay: const Duration(milliseconds: 500),
+        duration: const Duration(milliseconds: 900),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+                children: [
+                  CarouselSlider(
+                    options: CarouselOptions(
+                      height: 200.0,
+                      autoPlay: true,
+                      autoPlayInterval: Duration(seconds: 3),
+                      autoPlayAnimationDuration: Duration(milliseconds: 800),
+                      autoPlayCurve: Curves.fastOutSlowIn,
+                      enlargeCenterPage: true,
+                    ),
+                    items: imageListOfBanner.map((i) {
+                      return Builder(
+                        builder: (BuildContext context) {
+                          return Container(
+                            width: MediaQuery.of(context).size.width,
+                            margin: const EdgeInsets.symmetric(
+                                horizontal: 5.0, vertical: 5),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(15),
+                              child: Image.asset(
+                                i,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
-                ),
-                Positioned(
-                  right: 0,
-                  bottom: 0,
-                  child: Stack(
-                    children: [
-                      Image.asset(
-                        'assets/images/bcb_logo.png',
-                        fit: BoxFit.cover,
-                        height: 100,
-                        width: 100,
-                      ),
-                      Shimmer(
-                        gradient: LinearGradient(
-                            stops: const [
-                              0.4,
-                              0.5,
-                              0.6
-                            ],
-                            colors: [
-                              Colors.white.withOpacity(0),
-                              Colors.white.withOpacity(.5),
-                              Colors.white.withOpacity(0),
-                            ],
-                            begin: Alignment.bottomLeft,
-                            end: Alignment.topRight),
-                        child: Container(
+                          );
+                        },
+                      );
+                    }).toList(),
+                  ),
+                  Positioned(
+                    right: 0,
+                    bottom: 0,
+                    child: Stack(
+                      children: [
+                        Image.asset(
+                          'assets/images/bcb_logo.png',
+                          fit: BoxFit.cover,
                           height: 100,
                           width: 100,
-                          color: Colors.red,
                         ),
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Expanded(
-                flex: 1,
-                child: GestureDetector(
-                  onTap: () =>
-                      Navigator.of(context).pushNamed(LiveMatchPage.routeName),
-                  child: Column(
-                    children: const [
-                      RippleAnimation(
-                        color: Globals.colorRed,
-                        delay: Duration(milliseconds: 300),
-                        repeat: true,
-                        minRadius: 30,
-                        ripplesCount: 6,
-                        child: CircleAvatar(
-                          backgroundColor: Globals.colorRed,
-                          minRadius: 40,
-                          child: Icon(
-                            Icons.videocam,
-                            color: Colors.white,
-                            size: 45,
+                        Shimmer(
+                          gradient: LinearGradient(
+                              stops: const [
+                                0.4,
+                                0.5,
+                                0.6
+                              ],
+                              colors: [
+                                Colors.white.withOpacity(0),
+                                Colors.white.withOpacity(.5),
+                                Colors.white.withOpacity(0),
+                              ],
+                              begin: Alignment.bottomLeft,
+                              end: Alignment.topRight),
+                          child: Container(
+                            height: 100,
+                            width: 100,
+                            color: Colors.red,
                           ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        "WATCH LIVE",
-                        style: TextStyle(
-                            fontFamily: "Montserrat-Medium",
-                            fontSize: 24,
-                            color: Globals.colorRed),
-                      )
-                    ],
+                        )
+                      ],
+                    ),
                   ),
-                ),
-              ),
-              Expanded(
-                flex: 1,
-                child: GestureDetector(
-                  onTap: () => Navigator.of(context)
-                      .pushNamed(HighlightsScreen.routeName),
-                  child: Column(
-                    children: const [
-                      RippleAnimation(
-                        color: Globals.colorGreen,
-                        delay: Duration(milliseconds: 300),
-                        repeat: true,
-                        minRadius: 30,
-                        ripplesCount: 6,
-                        child: CircleAvatar(
-                          backgroundColor: Globals.colorGreen,
-                          minRadius: 40,
-                          child: Icon(
-                            Icons.play_arrow,
-                            color: Colors.white,
-                            size: 45,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        "HIGHLIGHTS",
-                        style: TextStyle(
-                            fontFamily: "Montserrat-Medium",
-                            fontSize: 24,
-                            color: Globals.colorGreen),
-                      )
-                    ],
-                  ),
-                ),
-              )
-            ]),
-            SizedBox(
-              height: 5,
-            ),
-            Card(
-              elevation: 10,
-              color: Colors.white70,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
-              margin: EdgeInsets.all(10),
-              child: Column(
-                children: [
-                  const Text("Fixtures",
-                      style: TextStyle(
-                          fontFamily: "Montserrat-SemiBold",
-                          fontSize: 30,
-                          color: Globals.colorGreen)),
-                  Image.asset("assets/images/cover2.jpeg")
                 ],
               ),
-            )
-          ],
+              const SizedBox(
+                height: 15,
+              ),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context)
+                        .pushNamed(LiveMatchPage.routeName),
+                    child: Column(
+                      children: const [
+                        RippleAnimation(
+                          color: Globals.colorRed,
+                          delay: Duration(milliseconds: 300),
+                          repeat: true,
+                          minRadius: 30,
+                          ripplesCount: 6,
+                          child: CircleAvatar(
+                            backgroundColor: Globals.colorRed,
+                            minRadius: 40,
+                            child: Icon(
+                              Icons.videocam,
+                              color: Colors.white,
+                              size: 45,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "WATCH LIVE",
+                          style: TextStyle(
+                              fontFamily: "Montserrat-Medium",
+                              fontSize: 24,
+                              color: Globals.colorRed),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: GestureDetector(
+                    onTap: () => Navigator.of(context)
+                        .pushNamed(HighlightsScreen.routeName),
+                    child: Column(
+                      children: const [
+                        RippleAnimation(
+                          color: Globals.colorGreen,
+                          delay: Duration(milliseconds: 300),
+                          repeat: true,
+                          minRadius: 30,
+                          ripplesCount: 6,
+                          child: CircleAvatar(
+                            backgroundColor: Globals.colorGreen,
+                            minRadius: 40,
+                            child: Icon(
+                              Icons.play_arrow,
+                              color: Colors.white,
+                              size: 45,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          "HIGHLIGHTS",
+                          style: TextStyle(
+                              fontFamily: "Montserrat-Medium",
+                              fontSize: 24,
+                              color: Globals.colorGreen),
+                        )
+                      ],
+                    ),
+                  ),
+                )
+              ]),
+              SizedBox(
+                height: 5,
+              ),
+              Card(
+                elevation: 10,
+                color: Colors.white70,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                margin: EdgeInsets.all(10),
+                child: Column(
+                  children: [
+                    const Text("Fixtures",
+                        style: TextStyle(
+                            fontFamily: "Montserrat-SemiBold",
+                            fontSize: 30,
+                            color: Globals.colorGreen)),
+                    Image.asset("assets/images/cover2.jpeg")
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
-      floatingActionButton: const FloatingActionButton(
-          onPressed: null,
-          backgroundColor: Globals.colorGreen,
+      floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed(LiveMatchPage.routeName);
+          },
+          backgroundColor: Colors.red,
           child: Icon(
             Icons.play_arrow,
             color: Colors.white,
           )).animate().slideY(begin: 1, end: 0, duration: 400.ms),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
+          onTap: (value) {
+            if (value == 1) {
+              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                content: Text(
+                  "Working On This Page",
+                ),
+                backgroundColor: Colors.green,
+              ));
+            }
+          },
           backgroundColor: Globals.colorGreen,
           items: const [
             BottomNavigationBarItem(

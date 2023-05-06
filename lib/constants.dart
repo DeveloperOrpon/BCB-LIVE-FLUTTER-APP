@@ -8,7 +8,7 @@ class Globals {
 }
 
 List<String> imageListOfBanner = [
-  'assets/images/pic-1.jpg',
   'assets/images/pic-3.jpg',
   'assets/images/pic-2.jpg',
+  'assets/images/pic-1.jpg',
 ];

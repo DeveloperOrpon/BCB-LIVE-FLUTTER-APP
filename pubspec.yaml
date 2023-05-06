@@ -43,6 +43,9 @@ dependencies:
   carousel_slider: ^4.2.1
   shimmer:
   simple_ripple_animation:
+  smooth_page_indicator:
+  entry:
+  lottie: ^2.3.2
 
 
 
