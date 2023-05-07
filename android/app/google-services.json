@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "495670541453",
+    "project_id": "crickbd-20121",
+    "storage_bucket": "crickbd-20121.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:495670541453:android:7062a4f5b141015801b6c4",
+        "android_client_info": {
+          "package_name": "com.example.untitled1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "495670541453-cuakvm1kd53rk7uu7qii8dar5oclll8p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2jBKuwUnwqA5UuedZWtRRL0L6dJdvtPY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "495670541453-cuakvm1kd53rk7uu7qii8dar5oclll8p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
