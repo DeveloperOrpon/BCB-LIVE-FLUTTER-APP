@@ -236,7 +236,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const Text("Fixtures",
                         style: TextStyle(
-                            fontFamily: "Montserrat-SemiBold",
+                            fontFamily: "NewsGothicStd-BoldOblique",
                             fontSize: 30,
                             color: Globals.colorGreen)),
                     Image.asset("assets/images/cover2.jpeg")
