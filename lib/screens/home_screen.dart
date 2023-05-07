@@ -45,6 +45,7 @@ class HomeScreen extends StatelessWidget {
         ),
         actions: [
           CircleAvatar(
+              radius: 0.5,
               backgroundColor: Colors.black12,
               child: IconButton(
                 icon: const Icon(
@@ -82,8 +83,9 @@ class HomeScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              Stack(
-                children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child:
                   CarouselSlider(
                     options: CarouselOptions(
                       height: 200.0,
@@ -112,41 +114,41 @@ class HomeScreen extends StatelessWidget {
                       );
                     }).toList(),
                   ),
-                  Positioned(
-                    right: 0,
-                    bottom: 0,
-                    child: Stack(
-                      children: [
-                        Image.asset(
-                          'assets/images/bcb_logo.png',
-                          fit: BoxFit.cover,
-                          height: 100,
-                          width: 100,
-                        ).animate(delay: 0.ms,onPlay: (controller) => controller.repeat()).shimmer(duration: 2.seconds)
-                        // Shimmer(
-                        //   gradient: LinearGradient(
-                        //       stops: const [
-                        //         0.4,
-                        //         0.5,
-                        //         0.6
-                        //       ],
-                        //       colors: [
-                        //         Colors.white.withOpacity(0),
-                        //         Colors.white.withOpacity(.5),
-                        //         Colors.white.withOpacity(0),
-                        //       ],
-                        //       begin: Alignment.bottomLeft,
-                        //       end: Alignment.topRight),
-                        //   child: Container(
-                        //     height: 100,
-                        //     width: 100,
-                        //     color: Colors.red,
-                        //   ),
-                        // )
-                      ],
-                    ),
-                  ),
-                ],
+                  // Positioned(
+                  //   right: 0,
+                  //   bottom: 0,
+                  //   child: Stack(
+                  //     children: [
+                  //       Image.asset(
+                  //         'assets/images/bcb_logo.png',
+                  //         fit: BoxFit.cover,
+                  //         height: 100,
+                  //         width: 100,
+                  //       ).animate(delay: 0.ms,onPlay: (controller) => controller.repeat()).shimmer(duration: 2.seconds)
+                  //       // Shimmer(
+                  //       //   gradient: LinearGradient(
+                  //       //       stops: const [
+                  //       //         0.4,
+                  //       //         0.5,
+                  //       //         0.6
+                  //       //       ],
+                  //       //       colors: [
+                  //       //         Colors.white.withOpacity(0),
+                  //       //         Colors.white.withOpacity(.5),
+                  //       //         Colors.white.withOpacity(0),
+                  //       //       ],
+                  //       //       begin: Alignment.bottomLeft,
+                  //       //       end: Alignment.topRight),
+                  //       //   child: Container(
+                  //       //     height: 100,
+                  //       //     width: 100,
+                  //       //     color: Colors.red,
+                  //       //   ),
+                  //       // )
+                  //     ],
+                  //   ),
+                  // ),
+
               ),
               const SizedBox(
                 height: 15,
@@ -223,7 +225,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 )
               ]),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Card(
@@ -252,7 +254,7 @@ class HomeScreen extends StatelessWidget {
             Navigator.of(context).pushNamed(LiveMatchPage.routeName);
           },
           backgroundColor: Colors.red,
-          child: Icon(
+          child: const Icon(
             Icons.play_arrow,
             color: Colors.white,
           )).animate().slideY(begin: 1, end: 0, duration: 400.ms),

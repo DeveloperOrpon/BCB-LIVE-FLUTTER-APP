@@ -25,10 +25,11 @@ class HighlightsScreen extends StatelessWidget {
         title: const Text("Highlights",
             style: TextStyle(
                 color: Color.fromRGBO(65, 100, 74, 1),
-                fontFamily: "Montserrat-ExtraBold")),
+                fontWeight: FontWeight.bold,
+                fontFamily: "NewsGothicStd-BoldOblique")),
         backgroundColor: Colors.white,
         actions: [
-          CircleAvatar(
+          const CircleAvatar(
               backgroundColor: Colors.black12,
               child: IconButton(
                 icon: Icon(
@@ -37,7 +38,7 @@ class HighlightsScreen extends StatelessWidget {
                 ),
                 onPressed: null,
               )),
-          SizedBox(
+          const SizedBox(
             width: 15,
           ),
           CircleAvatar(
@@ -82,9 +83,10 @@ class HighlightsScreen extends StatelessWidget {
                                       padding: const EdgeInsets.all(8.0),
                                       child: Text(
                                         data.items[index].title,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyMedium,
+                                        style: const TextStyle(
+                                          fontFamily: "NewsGothicStd",
+                                          fontSize: 12
+                                        ),
                                       ),
                                     ),
                                   ],
