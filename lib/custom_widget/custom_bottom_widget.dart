@@ -1,13 +1,14 @@
-import 'package:bcb_live_app/pages/home_page.dart';
+import 'package:bcb_live_app/provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 import '../pages/live_stream_page.dart';
-import '../pages/youtube_highlight_page.dart';
 
 class CustomBottomWidget extends StatelessWidget {
-  const CustomBottomWidget({Key? key}) : super(key: key);
+  final HomeProvider homeProvider;
+  const CustomBottomWidget({Key? key, required this.homeProvider})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +65,9 @@ class CustomBottomWidget extends StatelessWidget {
               children: [
                 IconButton(
                   onPressed: () {
-                    Get.offAll(const HomePage(), transition: Transition.fadeIn);
+                    homeProvider.homePageController.animateToPage(0,
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.fastLinearToSlowEaseIn);
                   },
                   icon: SvgPicture.asset(
                     'assets/images/home.svg',
@@ -73,8 +76,9 @@ class CustomBottomWidget extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Get.offAll(const YoutubeHighlightPage(),
-                        transition: Transition.fadeIn);
+                    homeProvider.homePageController.animateToPage(1,
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.fastLinearToSlowEaseIn);
                   },
                   icon: Image.asset(
                     'assets/images/play_list.png',
@@ -83,14 +87,22 @@ class CustomBottomWidget extends StatelessWidget {
                 ),
                 Container(width: Get.width * .20),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    homeProvider.homePageController.animateToPage(2,
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.fastLinearToSlowEaseIn);
+                  },
                   icon: SvgPicture.asset(
                     'assets/images/notification.svg',
                     color: Colors.white,
                   ),
                 ),
                 IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    homeProvider.homePageController.animateToPage(3,
+                        duration: const Duration(milliseconds: 600),
+                        curve: Curves.fastLinearToSlowEaseIn);
+                  },
                   icon: SvgPicture.asset(
                     'assets/images/user.svg',
                     color: Colors.white,

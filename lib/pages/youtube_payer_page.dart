@@ -45,6 +45,7 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
               showVideoProgressIndicator: true,
               bottomActions: [
                 CurrentPosition(),
+                Spacer(),
                 FullScreenButton(
                   controller: _ytController,
                   color: Colors.pink,

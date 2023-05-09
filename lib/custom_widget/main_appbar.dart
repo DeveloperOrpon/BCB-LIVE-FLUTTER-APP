@@ -69,7 +69,7 @@ class _MainAppbarState extends State<MainAppbar>
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     AnimatedTextKit(
-                      pause: Duration(seconds: 0),
+                      pause: const Duration(seconds: 0),
                       repeatForever: true,
                       animatedTexts: [
                         RotateAnimatedText(
