@@ -42,7 +42,7 @@ class HomeContent extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Get.to(
-                    const YoutubeHighlightPage(isFullPage: true),
+                    const YoutubeHighlightPage(),
                     transition: Transition.fadeIn,
                   );
                 },

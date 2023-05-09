@@ -37,7 +37,7 @@ class HomePage extends StatelessWidget {
                       controller: homeProvider.homePageController,
                       children: const [
                         HomeContent(),
-                        YoutubeHighlightPage(isFullPage: false),
+                        YoutubeHighlightPage(),
                         SchedulePage(),
                         ProfilePage()
                       ],
