@@ -38,51 +38,69 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
               decoration: const BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage("assets/images/BG-1.jpg"))),
-              child: DefaultTextStyle(
-                style: const TextStyle(
-                    color: Colors.red,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-                child: Column(
-                  children: [
-                    SizedBox(
-                      height: Get.height * .328,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        clipBehavior: Clip.none,
-                        children: [
-                          Image.asset(
-                            'assets/ads/cover_image.png',
-                            fit: BoxFit.cover,
+              child: Column(
+                children: [
+                  SizedBox(
+                    height: Get.height * .328,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      clipBehavior: Clip.none,
+                      children: [
+                        Image.asset(
+                          'assets/ads/cover_image.png',
+                          fit: BoxFit.cover,
+                        ),
+                        Image.asset(
+                          "assets/images/Logo-gif-4.gif",
+                          width: 180,
+                          height: 180,
+                        ),
+                        Chewie(
+                          controller: liveStreamProvider.chewieController!,
+                        ),
+                        Positioned(
+                          top: 20,
+                          left: 10,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.red.withOpacity(.4),
+                            ),
+                            onPressed: () {
+                              liveStreamProvider
+                                  .chewieController!.videoPlayerController
+                                  .seekTo(const Duration(days: 90));
+                            },
+                            child: const Text('Live'),
                           ),
-                          Image.asset(
-                            "assets/images/Logo-gif-4.gif",
-                            width: 60,
-                            height: 60,
-                          ),
-                          Chewie(
-                            controller: liveStreamProvider.chewieController!,
-                          ),
-                          Positioned(
-                            bottom: -19,
-                            left: 10,
-                            child: Column(
+                        ),
+                        Positioned(
+                          bottom: 20,
+                          left: 10,
+                          child: Container(
+                            width: Get.width,
+                            padding: const EdgeInsets.only(left: 8.0, right: 8),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Colors.red,
+                                Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    liveStreamProvider.chewieController!
+                                        .enterFullScreen();
+                                  },
+                                  icon: const Icon(
+                                    Icons.fullscreen,
+                                    color: Colors.red,
                                   ),
-                                  onPressed: () {},
-                                  child: Text('Live'),
-                                ),
+                                )
                               ],
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

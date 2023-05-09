@@ -68,10 +68,14 @@ class CustomBottomWidget extends StatelessWidget {
                     homeProvider.homePageController.animateToPage(0,
                         duration: const Duration(milliseconds: 600),
                         curve: Curves.fastLinearToSlowEaseIn);
+                    homeProvider.bottomNavigationPosition = 0;
                   },
                   icon: SvgPicture.asset(
                     'assets/images/home.svg',
-                    color: Colors.white,
+                    height: 60,
+                    color: homeProvider.bottomNavigationPosition == 0
+                        ? Colors.white
+                        : Colors.grey,
                   ),
                 ),
                 IconButton(
@@ -79,10 +83,13 @@ class CustomBottomWidget extends StatelessWidget {
                     homeProvider.homePageController.animateToPage(1,
                         duration: const Duration(milliseconds: 600),
                         curve: Curves.fastLinearToSlowEaseIn);
+                    homeProvider.bottomNavigationPosition = 1;
                   },
                   icon: Image.asset(
                     'assets/images/play_list.png',
-                    color: Colors.white,
+                    color: homeProvider.bottomNavigationPosition == 1
+                        ? Colors.white
+                        : Colors.grey,
                   ),
                 ),
                 Container(width: Get.width * .20),
@@ -91,10 +98,14 @@ class CustomBottomWidget extends StatelessWidget {
                     homeProvider.homePageController.animateToPage(2,
                         duration: const Duration(milliseconds: 600),
                         curve: Curves.fastLinearToSlowEaseIn);
+                    homeProvider.bottomNavigationPosition = 2;
                   },
                   icon: SvgPicture.asset(
                     'assets/images/notification.svg',
-                    color: Colors.white,
+                    height: 30,
+                    color: homeProvider.bottomNavigationPosition == 2
+                        ? Colors.white
+                        : Colors.grey,
                   ),
                 ),
                 IconButton(
@@ -102,10 +113,14 @@ class CustomBottomWidget extends StatelessWidget {
                     homeProvider.homePageController.animateToPage(3,
                         duration: const Duration(milliseconds: 600),
                         curve: Curves.fastLinearToSlowEaseIn);
+                    homeProvider.bottomNavigationPosition = 3;
                   },
                   icon: SvgPicture.asset(
                     'assets/images/user.svg',
-                    color: Colors.white,
+                    height: 60,
+                    color: homeProvider.bottomNavigationPosition == 3
+                        ? Colors.white
+                        : Colors.grey,
                   ),
                 )
               ],

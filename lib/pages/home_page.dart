@@ -5,7 +5,6 @@ import 'package:bcb_live_app/pages/schedule_page.dart';
 import 'package:bcb_live_app/pages/youtube_highlight_page.dart';
 import 'package:bcb_live_app/utils/app_const.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:provider/provider.dart';
 
 import '../custom_widget/custom_bottom_widget.dart';
@@ -18,13 +17,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //startLoading("Updating..");
-    Future.delayed(
-      const Duration(seconds: 5),
-      () {
-        EasyLoading.dismiss();
-      },
-    );
     return Consumer<HomeProvider>(
       builder: (context, homeProvider, child) => WillPopScope(
         onWillPop: () => _onWillPop(context),
@@ -45,7 +37,7 @@ class HomePage extends StatelessWidget {
                       controller: homeProvider.homePageController,
                       children: const [
                         HomeContent(),
-                        YoutubeHighlightPage(),
+                        YoutubeHighlightPage(isFullPage: false),
                         SchedulePage(),
                         ProfilePage()
                       ],
@@ -70,9 +62,9 @@ class HomePage extends StatelessWidget {
 
   BackdropFilter _buildExitDialog(BuildContext context) {
     return BackdropFilter(
-      filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
+      filter: ImageFilter.blur(sigmaX: 1, sigmaY: 1),
       child: AlertDialog(
-        backgroundColor: appPrimary,
+        backgroundColor: kGray,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
         ),

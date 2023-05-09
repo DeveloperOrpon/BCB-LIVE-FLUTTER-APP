@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeVideoPlayPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class YoutubeVideoPlayPage extends StatefulWidget {
 
 class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
   late YoutubePlayerController _ytController;
+  bool isExit = false;
 
   @override
   void initState() {
@@ -21,10 +23,13 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
     _ytController = YoutubePlayerController(
       initialVideoId: videoId!,
       flags: const YoutubePlayerFlags(
+        mute: false,
         autoPlay: true,
-        captionLanguage: 'en',
-        hideThumbnail: true,
-        forceHD: true,
+        disableDragSeek: false,
+        loop: false,
+        isLive: false,
+        forceHD: false,
+        enableCaption: true,
       ),
     );
     super.initState();
@@ -32,71 +37,84 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      //  appBar: AppBar(title: const Text("Playing Highlight")),
-      body: Container(
-        alignment: Alignment.center,
-        child: YoutubePlayerBuilder(
-            player: YoutubePlayer(
-              controlsTimeOut: const Duration(seconds: 1),
-              aspectRatio: 16 / 9,
-              controller: _ytController,
-              progressIndicatorColor: Colors.red,
-              showVideoProgressIndicator: true,
-              bottomActions: [
-                CurrentPosition(),
-                Spacer(),
-                FullScreenButton(
-                  controller: _ytController,
-                  color: Colors.pink,
-                ),
-              ],
-              onReady: () {
-                log('onReady for');
-              },
-              onEnded: (YoutubeMetaData md) {
-                _ytController.seekTo(const Duration(seconds: 0));
-              },
+    return YoutubePlayerBuilder(
+        player: YoutubePlayer(
+          controlsTimeOut: const Duration(seconds: 1),
+          aspectRatio: 16 / 9,
+          controller: _ytController,
+          progressIndicatorColor: Colors.red,
+          showVideoProgressIndicator: true,
+          bottomActions: [
+            CurrentPosition(),
+            ProgressBar(
+              isExpanded: true,
+              colors: const ProgressBarColors(
+                  playedColor: Colors.red, bufferedColor: Colors.red),
             ),
-            onEnterFullScreen: () {
-              SystemChrome.setPreferredOrientations([
-                DeviceOrientation.landscapeLeft,
-                DeviceOrientation.landscapeRight,
-              ]);
-            },
-            onExitFullScreen: () {
-              SystemChrome.setPreferredOrientations(
-                  [DeviceOrientation.portraitUp]);
-              Future.delayed(const Duration(seconds: 1), () {
-                _ytController.play();
-              });
-              Future.delayed(const Duration(seconds: 5), () {
-                SystemChrome.setPreferredOrientations(DeviceOrientation.values);
-              });
-            },
-            builder: (p0, p1) {
-              return YoutubePlayer(
-                controlsTimeOut: const Duration(seconds: 1),
-                aspectRatio: 16 / 9,
-                controller: _ytController,
-                progressIndicatorColor: Colors.red,
-                showVideoProgressIndicator: true,
-                bottomActions: [
-                  CurrentPosition(),
-                  FullScreenButton(
-                    controller: _ytController,
-                    color: Colors.pink,
-                  ),
-                ],
-                onReady: () {
-                  log('onReady for');
-                },
-                onEnded: (YoutubeMetaData md) {
-                  _ytController.seekTo(const Duration(seconds: 0));
-                },
-              );
-            }),
-      ),
-    );
+          ],
+          onReady: () {
+            log('onReady for');
+          },
+          onEnded: (YoutubeMetaData md) {
+            _ytController.seekTo(const Duration(seconds: 0));
+          },
+        ),
+        onEnterFullScreen: () {},
+        onExitFullScreen: () {},
+        builder: (context, player) {
+          return Scaffold(
+            body: SafeArea(
+              child: Container(
+                decoration: const BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage("assets/images/BG-1.jpg"),
+                      fit: BoxFit.cover),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Stack(
+                      children: [
+                        player,
+                        Positioned(
+                          bottom: 7,
+                          left: 0,
+                          child: Container(
+                            width: Get.width,
+                            padding: const EdgeInsets.only(left: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                const Spacer(),
+                                IconButton(
+                                  onPressed: () {
+                                    _ytController.toggleFullScreenMode();
+                                  },
+                                  icon: const Icon(
+                                    Icons.fullscreen,
+                                    color: Colors.red,
+                                    size: 34,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values); // to re-show bars
   }
 }

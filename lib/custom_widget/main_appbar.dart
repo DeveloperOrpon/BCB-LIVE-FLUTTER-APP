@@ -10,16 +10,8 @@ import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 import '../pages/live_stream_page.dart';
 
-class MainAppbar extends StatefulWidget {
+class MainAppbar extends StatelessWidget {
   const MainAppbar({Key? key}) : super(key: key);
-
-  @override
-  State<MainAppbar> createState() => _MainAppbarState();
-}
-
-class _MainAppbarState extends State<MainAppbar>
-    with SingleTickerProviderStateMixin {
-  bool check = true;
 
   @override
   Widget build(BuildContext context) {
@@ -28,74 +20,75 @@ class _MainAppbarState extends State<MainAppbar>
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
-            children: [
-              Container(
-                width: 50,
-                height: 50,
-                decoration: const BoxDecoration(shape: BoxShape.circle),
-                child: Image.asset(appLogo)
-                    .animate(
-                      delay: 0.ms,
-                      onPlay: (controller) => controller.repeat(),
-                    )
-                    .shimmer(
-                      duration: const Duration(seconds: 2),
-                    ),
-              ),
-              const SizedBox(
-                width: 5,
-              ),
-              const Padding(
-                  padding: EdgeInsets.all(4.0),
-                  child: Text(
-                    "BCB LIVE",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                        fontSize: 21),
-                  )),
-              const SizedBox(
-                  height: 35,
-                  child: VerticalDivider(color: Colors.grey, thickness: 1)),
-              StatefulBuilder(builder: (context, setStateNew) {
-                Timer.periodic(const Duration(seconds: 2), (timer) {
-                  setStateNew(() {
-                    check = !check;
+          Expanded(
+            child: Row(
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: const BoxDecoration(shape: BoxShape.circle),
+                  child: Image.asset(appLogo)
+                      .animate(
+                        delay: 0.ms,
+                        onPlay: (controller) => controller.repeat(),
+                      )
+                      .shimmer(
+                        duration: const Duration(seconds: 2),
+                      ),
+                ),
+                const SizedBox(
+                  width: 5,
+                ),
+                const Padding(
+                    padding: EdgeInsets.all(4.0),
+                    child: Text(
+                      "BCB LIVE",
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white,
+                          fontSize: 21),
+                    )),
+                const SizedBox(
+                    height: 35,
+                    child: VerticalDivider(color: Colors.grey, thickness: 1)),
+                StatefulBuilder(builder: (context, setStateNew) {
+                  Timer.periodic(const Duration(seconds: 2), (timer) {
+                    setStateNew(() {});
                   });
-                });
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AnimatedTextKit(
-                      pause: const Duration(seconds: 0),
-                      repeatForever: true,
-                      animatedTexts: [
-                        RotateAnimatedText(
-                            '${DateFormat.jm().format(DateTime.now())}\n${DateFormat.yMMMd().format(DateTime.now())}',
-                            textStyle: const TextStyle(
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AnimatedTextKit(
+                        pause: const Duration(seconds: 0),
+                        repeatForever: true,
+                        animatedTexts: [
+                          RotateAnimatedText(
+                              '${DateFormat.jm().format(DateTime.now())}\n${DateFormat.yMMMd().format(DateTime.now())}',
+                              textStyle: const TextStyle(
+                                  fontWeight: FontWeight.w100,
+                                  color: Colors.white70,
+                                  fontSize: 14)),
+                          ColorizeAnimatedText('Live On\nTap To Watch',
+                              textStyle: const TextStyle(
                                 fontWeight: FontWeight.w100,
-                                color: Colors.white70,
-                                fontSize: 15)),
-                        ColorizeAnimatedText('Live On\nTap To Watch',
-                            textStyle: const TextStyle(
-                              fontWeight: FontWeight.w100,
-                              color: Colors.red,
-                              fontSize: 15,
-                            ),
-                            colors: [
-                              Colors.red,
-                              Colors.amber,
-                              Colors.pink,
-                            ]),
-                      ],
-                    ),
-                  ],
-                );
-              }),
-            ],
+                                color: Colors.red,
+                                fontSize: 14,
+                              ),
+                              colors: [
+                                Colors.red,
+                                Colors.amber,
+                                Colors.pink,
+                              ]),
+                        ],
+                      ),
+                    ],
+                  );
+                }),
+              ],
+            ),
           ),
+          const SizedBox(width: 10),
           InkWell(
             onTap: () {
               Get.to(const LiveStreamPage(),

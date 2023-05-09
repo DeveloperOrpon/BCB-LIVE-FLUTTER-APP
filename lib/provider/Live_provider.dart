@@ -2,6 +2,8 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
+import '../utils/app_const.dart';
+
 class LiveStreamProvider extends ChangeNotifier {
   ChewieController? chewieController;
   final videoPlayerController = VideoPlayerController.network(
@@ -30,12 +32,15 @@ class LiveStreamProvider extends ChangeNotifier {
             ),
           ),
           child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: appPrimary,
+              ),
               onPressed: () {
                 if (!chewieController!.isPlaying) {
                   intVideo();
                 } else {}
               },
-              child: const Text("Reload")),
+              child: const Text("Stream Offline")),
         );
       },
     );

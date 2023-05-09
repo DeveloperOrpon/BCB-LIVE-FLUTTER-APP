@@ -2,6 +2,7 @@ import 'package:bcb_live_app/pages/youtube_highlight_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
 import '../custom_widget/higHlight_cart.dart';
@@ -18,7 +19,10 @@ class HomeContent extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        const TodayMatchWidget(),
+        const TodayMatchWidget()
+            .animate()
+            .fade(duration: 100.ms)
+            .scale(delay: 50.ms),
         const SizedBox(
           height: 10,
         ),
@@ -39,7 +43,7 @@ class HomeContent extends StatelessWidget {
               InkWell(
                 onTap: () {
                   Get.to(
-                    const YoutubeHighlightPage(),
+                    const YoutubeHighlightPage(isFullPage: true),
                     transition: Transition.fadeIn,
                   );
                 },
