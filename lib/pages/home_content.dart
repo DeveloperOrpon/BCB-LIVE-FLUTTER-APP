@@ -1,13 +1,12 @@
 import 'package:bcb_live_app/pages/youtube_highlight_page.dart';
+import 'package:bcb_live_app/utils/demo_data.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:entry/entry.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
-import '../custom_widget/higHlight_cart.dart';
 import '../custom_widget/today_match_widget.dart';
-import '../utils/app_const.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({Key? key}) : super(key: key);
@@ -51,7 +50,7 @@ class HomeContent extends StatelessWidget {
                   children: [
                     CarouselSlider(
                       options: CarouselOptions(
-                        height: 200.0,
+                        height: 400.0,
                         autoPlay: true,
                         autoPlayInterval: const Duration(seconds: 3),
                         autoPlayAnimationDuration:
@@ -59,20 +58,20 @@ class HomeContent extends StatelessWidget {
                         autoPlayCurve: Curves.fastOutSlowIn,
                         enlargeCenterPage: true,
                       ),
-                      items: imageListOfBanner.map((i) {
+                      items: items.map((i) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Stack(
                               children: [
                                 Container(
-                                  height: 200,
-                                  width: MediaQuery.of(context).size.width,
+                                  height: 400,
+                                  width: Get.width,
                                   margin: const EdgeInsets.symmetric(
                                       horizontal: 5.0, vertical: 5),
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(15),
                                     child: Image.asset(
-                                      i,
+                                      i.thumbnailUrl,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -104,31 +103,31 @@ class HomeContent extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(
-          height: 190,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            shrinkWrap: true,
-            children: const [
-              HighlightCart(
-                url: 'assets/ads/ad1.jpg',
-                id: 0,
-              ),
-              HighlightCart(
-                url: 'assets/ads/ad2.jpg',
-                id: 2,
-              ),
-              HighlightCart(
-                url: 'assets/ads/ad3.jpg',
-                id: 1,
-              ),
-              HighlightCart(
-                url: 'assets/ads/ad4.jpg',
-                id: 3,
-              ),
-            ],
-          ),
-        )
+        // SizedBox(
+        //   height: 190,
+        //   child: ListView(
+        //     scrollDirection: Axis.horizontal,
+        //     shrinkWrap: true,
+        //     children: const [
+        //       HighlightCart(
+        //         url: 'assets/ads/ad1.jpg',
+        //         id: 0,
+        //       ),
+        //       HighlightCart(
+        //         url: 'assets/ads/ad2.jpg',
+        //         id: 2,
+        //       ),
+        //       HighlightCart(
+        //         url: 'assets/ads/ad3.jpg',
+        //         id: 1,
+        //       ),
+        //       HighlightCart(
+        //         url: 'assets/ads/ad4.jpg',
+        //         id: 3,
+        //       ),
+        //     ],
+        //   ),
+        // )
       ],
     );
   }

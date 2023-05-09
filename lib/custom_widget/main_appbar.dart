@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:bcb_live_app/utils/app_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -55,35 +54,37 @@ class MainAppbar extends StatelessWidget {
                   Timer.periodic(const Duration(seconds: 2), (timer) {
                     setStateNew(() {});
                   });
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      AnimatedTextKit(
-                        pause: const Duration(seconds: 0),
-                        repeatForever: true,
-                        animatedTexts: [
-                          RotateAnimatedText(
-                              '${DateFormat.jm().format(DateTime.now())}\n${DateFormat.yMMMd().format(DateTime.now())}',
-                              textStyle: const TextStyle(
-                                  fontWeight: FontWeight.w100,
-                                  color: Colors.white70,
-                                  fontSize: 14)),
-                          ColorizeAnimatedText('Live On\nTap To Watch',
-                              textStyle: const TextStyle(
-                                fontWeight: FontWeight.w100,
-                                color: Colors.red,
-                                fontSize: 14,
-                              ),
-                              colors: [
-                                Colors.red,
-                                Colors.amber,
-                                Colors.pink,
-                              ]),
-                        ],
-                      ),
-                    ],
-                  );
+                  return Text(
+                      '${DateFormat.jm().format(DateTime.now())}\n${DateFormat.yMMMd().format(DateTime.now())}',
+                      style: const TextStyle(
+                          fontWeight: FontWeight.w100,
+                          color: Colors.white70,
+                          fontSize: 14));
+                  // return Column(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     AnimatedTextKit(
+                  //       pause: const Duration(seconds: 0),
+                  //       repeatForever: true,
+                  //       animatedTexts: [
+                  //         RotateAnimatedText(
+                  //             ),
+                  //         ColorizeAnimatedText('Live On\nTap To Watch',
+                  //             textStyle: const TextStyle(
+                  //               fontWeight: FontWeight.w100,
+                  //               color: Colors.red,
+                  //               fontSize: 14,
+                  //             ),
+                  //             colors: [
+                  //               Colors.red,
+                  //               Colors.amber,
+                  //               Colors.pink,
+                  //             ]),
+                  //       ],
+                  //     ),
+                  //   ],
+                  // );
                 }),
               ],
             ),
