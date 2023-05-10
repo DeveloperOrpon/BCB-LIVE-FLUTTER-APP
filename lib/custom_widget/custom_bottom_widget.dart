@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../pages/live_stream_page.dart';
+import '../pages/watch_youtube_live_page.dart';
 
 class CustomBottomWidget extends StatelessWidget {
   final HomeProvider homeProvider;
@@ -38,8 +38,10 @@ class CustomBottomWidget extends StatelessWidget {
               margin: const EdgeInsets.only(top: 15),
               child: FloatingActionButton(
                 onPressed: () {
-                  Get.to(const LiveStreamPage(),
-                      transition: Transition.rightToLeftWithFade);
+                  // Get.to(const LiveStreamPage(),
+                  //     transition: Transition.rightToLeftWithFade);
+                  Get.to(const WatchYoutubeLiveStream(),
+                      transition: Transition.fade);
                 },
                 backgroundColor: Colors.red,
                 elevation: 0.1,

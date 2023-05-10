@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -14,11 +15,11 @@ class YoutubeVideoPlayPage extends StatefulWidget {
 }
 
 class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
-  late YoutubePlayerController _ytController;
-  bool isExit = false;
-
+  YoutubePlayerController? _ytController;
   @override
   void initState() {
+    EasyLoading.dismiss();
+
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
@@ -34,7 +35,7 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
         disableDragSeek: false,
         loop: false,
         isLive: false,
-        forceHD: false,
+        forceHD: true,
         enableCaption: true,
       ),
     );
@@ -49,8 +50,8 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
       return YoutubePlayerBuilder(
           player: YoutubePlayer(
             controlsTimeOut: const Duration(seconds: 1),
-            aspectRatio: 16 / 9,
-            controller: _ytController,
+            aspectRatio: 16 / 7,
+            controller: _ytController!,
             progressIndicatorColor: Colors.red,
             showVideoProgressIndicator: true,
             bottomActions: [
@@ -60,12 +61,20 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
                 colors: const ProgressBarColors(
                     playedColor: Colors.red, bufferedColor: Colors.red),
               ),
+              IconButton(
+                  onPressed: () {
+                    Get.back();
+                  },
+                  icon: const Icon(
+                    Icons.fullscreen_exit_outlined,
+                    color: Colors.red,
+                  ))
             ],
             onReady: () {
               log('onReady for');
             },
             onEnded: (YoutubeMetaData md) {
-              _ytController.seekTo(const Duration(seconds: 0));
+              _ytController!.seekTo(const Duration(seconds: 0));
             },
           ),
           onEnterFullScreen: () {},
@@ -76,48 +85,57 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
             fullScreen++;
           },
           builder: (context, player) {
-            return Scaffold(
-              body: SafeArea(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/BG-1.jpg"),
-                        fit: BoxFit.cover),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Stack(
-                        children: [
-                          player,
-                          Positioned(
-                            bottom: 7,
-                            left: 0,
-                            child: Container(
-                              width: Get.width,
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Spacer(),
-                                  IconButton(
-                                    onPressed: () {
-                                      _ytController.toggleFullScreenMode();
-                                    },
-                                    icon: const Icon(
-                                      Icons.fullscreen,
-                                      color: Colors.red,
-                                      size: 34,
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
+            return WillPopScope(
+              onWillPop: () async {
+                if (_ytController != null) {
+                  return true;
+                }
+                return false;
+              },
+              child: Scaffold(
+                body: SafeArea(
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage("assets/images/BG-1.jpg"),
+                          fit: BoxFit.cover),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Stack(
+                          children: [
+                            player,
+                            if (_ytController != null)
+                              Positioned(
+                                bottom: 7,
+                                left: 0,
+                                child: Container(
+                                  width: Get.width,
+                                  padding: const EdgeInsets.only(left: 20),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Spacer(),
+                                      IconButton(
+                                        onPressed: () {
+                                          _ytController!.toggleFullScreenMode();
+                                        },
+                                        icon: const Icon(
+                                          Icons.fullscreen,
+                                          color: Colors.red,
+                                          size: 34,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              )
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -129,6 +147,10 @@ class _YoutubeVideoPlayPageState extends State<YoutubeVideoPlayPage> {
   @override
   void dispose() {
     super.dispose();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
         overlays: SystemUiOverlay.values); // to re-show bars
   }

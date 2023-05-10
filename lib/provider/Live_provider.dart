@@ -1,8 +1,7 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:video_player/video_player.dart';
-
-import '../utils/app_const.dart';
 
 class LiveStreamProvider extends ChangeNotifier {
   ChewieController? chewieController;
@@ -25,22 +24,36 @@ class LiveStreamProvider extends ChangeNotifier {
       controlsSafeAreaMinimum: const EdgeInsets.all(0),
       errorBuilder: (context, errorMessage) {
         return Container(
-          alignment: Alignment.center,
+          alignment: Alignment.bottomCenter,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/ads/cover_image.png"),
-            ),
+                image: AssetImage("assets/ads/live-logo.jpg"),
+                fit: BoxFit.cover),
           ),
-          child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: appPrimary,
-              ),
-              onPressed: () {
-                if (!chewieController!.isPlaying) {
-                  intVideo();
-                } else {}
-              },
-              child: const Text("Stream Offline")),
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: const Text(
+              "Next match starts tomorrow at 9AM",
+              style: TextStyle(
+                  color: Color.fromRGBO(242, 227, 219, 1), fontSize: 9),
+            )
+                .animate(onPlay: (controller) {
+                  controller.repeat();
+                })
+                .scaleXY(end: 1.1, duration: 600.ms)
+                .then(delay: 5.seconds)
+                .scaleXY(end: 1 / 1.1),
+          ),
+          // child: ElevatedButton(
+          //     style: ElevatedButton.styleFrom(
+          //       backgroundColor: appPrimary,
+          //     ),
+          //     onPressed: () {
+          //       if (!chewieController!.isPlaying) {
+          //         intVideo();
+          //       } else {}
+          //     },
+          //     child: const Text("Stream Offline")),
         );
       },
     );

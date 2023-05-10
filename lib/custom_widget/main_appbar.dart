@@ -7,7 +7,7 @@ import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
-import '../pages/live_stream_page.dart';
+import '../pages/watch_youtube_live_page.dart';
 
 class MainAppbar extends StatelessWidget {
   const MainAppbar({Key? key}) : super(key: key);
@@ -92,8 +92,10 @@ class MainAppbar extends StatelessWidget {
           const SizedBox(width: 10),
           InkWell(
             onTap: () {
-              Get.to(const LiveStreamPage(),
-                  transition: Transition.rightToLeftWithFade);
+              // Get.to(const LiveStreamPage(),
+              //     transition: Transition.rightToLeftWithFade);
+              Get.to(const WatchYoutubeLiveStream(),
+                  transition: Transition.fade);
             },
             child: const RippleAnimation(
               color: Colors.redAccent,

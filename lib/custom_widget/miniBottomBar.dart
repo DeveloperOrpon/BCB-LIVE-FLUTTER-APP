@@ -1,13 +1,12 @@
 import 'package:bcb_live_app/provider/home_provider.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:provider/provider.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
-import '../utils/app_const.dart';
 import '../utils/demo_data.dart';
-import '../utils/testStyle.dart';
-import 'custom_youtube_ui.dart';
 import 'highlight_cart_ui.dart';
 
 class MiniBottomBar extends StatelessWidget {
@@ -35,106 +34,101 @@ class MiniBottomBar extends StatelessWidget {
                 color: Theme.of(context).scaffoldBackgroundColor,
                 child: CustomScrollView(
                   slivers: [
-                    SliverToBoxAdapter(
-                      child: Column(
-                        children: [
-                          Stack(
+                    SliverAppBar(
+                      leading: IconButton(
+                          onPressed: () {
+                            homeProvider.youtubePlayerController.pause();
+                          },
+                          icon: const Icon(
+                              CupertinoIcons.arrowtriangle_down_fill)),
+                      backgroundColor: Colors.black,
+                      pinned: true,
+                      bottom: PreferredSize(
+                          preferredSize: const Size.fromHeight(274),
+                          child: Column(
                             children: [
                               Stack(
                                 children: [
-                                  Image.asset(
-                                    homeProvider.selectHighlight!.thumbnailUrl,
-                                    height: 220,
-                                    width: double.infinity,
-                                    fit: BoxFit.cover,
+                                  Stack(
+                                    children: [
+                                      Image.asset(
+                                        homeProvider
+                                            .selectHighlight!.thumbnailUrl,
+                                        height: 220,
+                                        width: double.infinity,
+                                        fit: BoxFit.cover,
+                                      ),
+                                      //youtube
+                                      YoutubePlayer(
+                                        controlsTimeOut:
+                                            const Duration(seconds: 1),
+                                        aspectRatio: 16 / 9,
+                                        controller: homeProvider
+                                            .youtubePlayerController,
+                                        progressIndicatorColor: Colors.red,
+                                        showVideoProgressIndicator: true,
+                                        bottomActions: [
+                                          CurrentPosition(),
+                                          ProgressBar(
+                                            isExpanded: true,
+                                            colors: const ProgressBarColors(
+                                              playedColor: Colors.red,
+                                              bufferedColor: Colors.red,
+                                            ),
+                                          ),
+                                        ],
+                                        onReady: () {},
+                                      )
+                                    ],
                                   ),
-                                  //youtube
-                                  CustomYoutubeUi(
-                                    url: homeProvider.selectHighlight!.videoUrl,
+                                  IconButton(
+                                    onPressed: () {
+                                      homeProvider.miniPlayerController
+                                          .animateToHeight(
+                                              state: PanelState.MIN);
+                                      homeProvider.youtubePlayerController
+                                          .pause();
+                                    },
+                                    icon: const Icon(
+                                      Icons.keyboard_arrow_down_rounded,
+                                      size: 30,
+                                      color: Colors.white,
+                                    ),
                                   )
                                 ],
                               ),
-                              IconButton(
-                                onPressed: () {
-                                  homeProvider.miniPlayerController
-                                      .animateToHeight(state: PanelState.MIN);
-                                  // homeProvider.ytController.pause();
-                                },
-                                icon: const Icon(
-                                  Icons.keyboard_arrow_down_rounded,
-                                  size: 30,
+                              const LinearProgressIndicator(
+                                value: 1,
+                                valueColor: AlwaysStoppedAnimation(Colors.red),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  textAlign: TextAlign.justify,
+                                  homeProvider.selectHighlight!.title,
+                                  style: const TextStyle(
+                                      fontSize: 16, color: Colors.white),
+                                ),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: Divider(
                                   color: Colors.white,
-                                ),
-                              )
-                            ],
-                          ),
-                          const LinearProgressIndicator(
-                            value: .4,
-                            valueColor: AlwaysStoppedAnimation(Colors.red),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text(
-                              textAlign: TextAlign.justify,
-                              homeProvider.selectHighlight!.title,
-                              style: const TextStyle(
-                                  fontSize: 16, color: Colors.white),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                    side: const BorderSide(
-                                  color: appPrimary,
-                                )),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Save",
-                                  style: whiteText,
-                                ),
-                              ),
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                    side: const BorderSide(
-                                  color: appPrimary,
-                                )),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Offline",
-                                  style: whiteText,
-                                ),
-                              ),
-                              OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                    side: const BorderSide(
-                                  color: appPrimary,
-                                )),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Share",
-                                  style: whiteText,
+                                  height: 5,
                                 ),
                               ),
                             ],
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(8.0),
-                            child: Divider(
-                              color: Colors.white,
-                              height: 5,
-                            ),
-                          ),
-                        ],
-                      ),
+                          )),
                     ),
                     SliverList(
                       delegate: SliverChildBuilderDelegate(
-                          (context, index) => HighlightCartUi(
-                              highlight: items[index],
-                              homeProvider: homeProvider),
-                          childCount: items.length),
+                        (context, index) => HighlightCartUi(
+                            youtubePlayerController:
+                                homeProvider.youtubePlayerController,
+                            highlight: items[index],
+                            homeProvider: homeProvider),
+                        childCount: items.length,
+                      ),
                     ),
                   ],
                 ),

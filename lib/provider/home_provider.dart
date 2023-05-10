@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'package:bcb_live_app/utils/demo_data.dart';
 import 'package:flutter/material.dart';
 import 'package:miniplayer/miniplayer.dart';
+import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class HomeProvider extends ChangeNotifier {
   PageController homePageController = PageController();
+  final YoutubePlayerController youtubePlayerController =
+      YoutubePlayerController(initialVideoId: 'TJmk31zvhLM');
   int _videoId = 0;
   Highlight? _selectHighlight;
   final MiniplayerController miniPlayerController = MiniplayerController();

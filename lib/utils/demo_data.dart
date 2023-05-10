@@ -18,34 +18,33 @@ class Highlight with ChangeNotifier {
 
 final List<Highlight> items = [
   Highlight(
-      id: "h1",
-      title:
-          "DPDCL | Highlights | Abahani Limited Vs Mohammedan Sporting Club Ltd | Match 68",
+      id: "1",
+      title: "Bangladesh's top 5 memorable moments",
       description:
           "Walton Dhaka Premier Division Cricket League 2022-23 | Super League",
-      videoUrl: "https://youtu.be/8wb3hiF20bQ",
-      thumbnailUrl: "assets/ads/ad1.jpg"),
+      videoUrl: "https://youtu.be/TJmk31zvhLM",
+      thumbnailUrl: "assets/ads/ads1.jpg"),
   Highlight(
-      id: "h2",
-      thumbnailUrl: "assets/ads/ad2.jpg",
+      id: "2",
+      thumbnailUrl: "assets/ads/ads2.jpg",
       title:
-          "DPDCL Highlights Prime Bank Cricket Club Vs Agrani Bank Cricket Club Match 62",
+          "Shakib Stars In Huge Chase! | Windies vs Bangladesh - Match Highlights | ICC Cricket World Cup 2019",
       description:
           "Walton Dhaka Premier Division Cricket League 2022-23 | Super League",
-      videoUrl: "https://youtu.be/e6R6VsgD8yQ"),
+      videoUrl: "https://www.youtube.com/watch?v=LRtEJPSj2-8"),
   Highlight(
       id: "h3",
-      thumbnailUrl: "assets/ads/ad4.jpg",
-      title:
-          "DPDCL Highlights Gazi Group Cricketers Vs Brothers Union Limited 59",
+      thumbnailUrl: "assets/ads/ads3.jpg",
+      title: "Pakistan vs Bangladesh 2020 | Full Highlights |1st T20I | PCB",
       description:
           "Walton Dhaka Premier Division Cricket League 2022-23 | Super League",
-      videoUrl: 'https://youtu.be/8T8FyuivG64'),
+      videoUrl: 'https://www.youtube.com/watch?v=JXZyMUpYG88'),
   Highlight(
       id: "h4",
-      thumbnailUrl: "assets/ads/ad3.jpg",
-      title: "DPDCL Highlights Gazi Group Cricketers Vs City Club Match 52",
+      thumbnailUrl: "assets/ads/ads4.jpg",
+      title:
+          "Highlights | HD | Bangladesh vs India | 2nd ODI | Cricket | T Sports",
       description:
           "Walton Dhaka Premier Division Cricket League 2022-23 | Super League",
-      videoUrl: "https://youtu.be/hmsDXQtETns"),
+      videoUrl: "https://www.youtube.com/watch?v=iW2YvdDZ0fw"),
 ];

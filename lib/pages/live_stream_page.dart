@@ -73,30 +73,30 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
                             child: const Text('Live'),
                           ),
                         ),
-                        Positioned(
-                          bottom: 20,
-                          left: 10,
-                          child: Container(
-                            width: Get.width,
-                            padding: const EdgeInsets.only(left: 8.0, right: 8),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Spacer(),
-                                IconButton(
-                                  onPressed: () {
-                                    liveStreamProvider.chewieController!
-                                        .enterFullScreen();
-                                  },
-                                  icon: const Icon(
-                                    Icons.fullscreen,
-                                    color: Colors.red,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
+                        // Positioned(
+                        //   bottom: 20,
+                        //   left: 10,
+                        //   child: Container(
+                        //     width: Get.width,
+                        //     padding: const EdgeInsets.only(left: 8.0, right: 8),
+                        //     child: Row(
+                        //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        //       children: [
+                        //         Spacer(),
+                        //         IconButton(
+                        //           onPressed: () {
+                        //             liveStreamProvider.chewieController!
+                        //                 .enterFullScreen();
+                        //           },
+                        //           icon: const Icon(
+                        //             Icons.fullscreen,
+                        //             color: Colors.red,
+                        //           ),
+                        //         )
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ),
                       ],
                     ),
                   ),
