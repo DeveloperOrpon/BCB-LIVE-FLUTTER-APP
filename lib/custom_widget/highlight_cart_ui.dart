@@ -1,7 +1,8 @@
-import 'package:bcb_live_app/provider/home_provider.dart';
+import 'package:bcb_live_app/controller/home_controller.dart';
 import 'package:bcb_live_app/utils/testStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:miniplayer/miniplayer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 import '../utils/demo_data.dart';
@@ -9,25 +10,25 @@ import '../utils/demo_data.dart';
 class HighlightCartUi extends StatelessWidget {
   final YoutubePlayerController youtubePlayerController;
   final Highlight highlight;
-  final HomeProvider homeProvider;
+  final HomeController homeController;
 
   const HighlightCartUi({
     Key? key,
     required this.highlight,
-    required this.homeProvider,
     required this.youtubePlayerController,
+    required this.homeController,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        // homeProvider.selectHighlight = highlight;
-        // String? videoId = YoutubePlayer.convertUrlToId(
-        //     homeProvider.selectHighlight!.videoUrl);
-        // youtubePlayerController.load(videoId!);
-        // homeProvider.miniPlayerController
-        //     .animateToHeight(state: PanelState.MAX);
+        homeController.selectHighlight.value = highlight;
+        String? videoId = YoutubePlayer.convertUrlToId(
+            homeController.selectHighlight.value!.videoUrl);
+        youtubePlayerController.load(videoId!);
+        homeController.miniPlayerController
+            .animateToHeight(state: PanelState.MAX);
       },
       child: Stack(
         children: [

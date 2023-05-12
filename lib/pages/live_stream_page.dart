@@ -1,9 +1,9 @@
-import 'package:bcb_live_app/provider/Live_provider.dart';
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+
+import '../controller/live_controller.dart';
 
 class LiveStreamPage extends StatefulWidget {
   const LiveStreamPage({Key? key}) : super(key: key);
@@ -15,13 +15,10 @@ class LiveStreamPage extends StatefulWidget {
 class _LiveStreamPageState extends State<LiveStreamPage> {
   @override
   Widget build(BuildContext context) {
-    // Timer.periodic(const Duration(seconds: 10), (timer) {
-    //   log("1 $timer");
-    // });
-    return Consumer<LiveStreamProvider>(
-      builder: (context, liveStreamProvider, child) {
-        liveStreamProvider.intVideo();
-        if (liveStreamProvider.chewieController == null) {
+    return GetBuilder(
+      init: LiveController(),
+      builder: (liveStreamController) {
+        if (liveStreamController.chewieController == null) {
           return const SpinKitWave(
             color: Colors.red,
             size: 50.0,
@@ -29,7 +26,7 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
         }
         return WillPopScope(
           onWillPop: () async {
-            liveStreamProvider.chewieController!.pause();
+            liveStreamController.chewieController!.pause();
             return true;
           },
           child: Scaffold(
@@ -56,7 +53,7 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
                           height: 180,
                         ),
                         Chewie(
-                          controller: liveStreamProvider.chewieController!,
+                          controller: liveStreamController.chewieController!,
                         ),
                         Positioned(
                           top: 20,
@@ -66,7 +63,7 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
                               backgroundColor: Colors.red.withOpacity(.4),
                             ),
                             onPressed: () {
-                              liveStreamProvider
+                              liveStreamController
                                   .chewieController!.videoPlayerController
                                   .seekTo(const Duration(days: 90));
                             },

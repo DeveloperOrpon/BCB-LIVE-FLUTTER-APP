@@ -4,11 +4,11 @@ import 'package:bcb_live_app/pages/profile_page.dart';
 import 'package:bcb_live_app/pages/schedule_page.dart';
 import 'package:bcb_live_app/utils/app_const.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
+import '../controller/home_controller.dart';
 import '../custom_widget/custom_bottom_widget.dart';
 import '../custom_widget/main_appbar.dart';
-import '../provider/home_provider.dart';
 import 'highlight_content.dart';
 import 'home_content.dart';
 
@@ -17,11 +17,13 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeProvider>(
-      builder: (context, homeProvider, child) => WillPopScope(
+    return GetBuilder(
+      init: HomeController(),
+      builder: (homeController) => WillPopScope(
         onWillPop: () => _onWillPop(context),
         child: Scaffold(
-          bottomNavigationBar: CustomBottomWidget(homeProvider: homeProvider),
+          bottomNavigationBar:
+              CustomBottomWidget(homeController: homeController),
           body: SafeArea(
             child: Container(
               decoration: const BoxDecoration(
@@ -34,7 +36,11 @@ class HomePage extends StatelessWidget {
                   const MainAppbar(),
                   Expanded(
                     child: PageView(
-                      controller: homeProvider.homePageController,
+                      physics: const ScrollPhysics(),
+                      onPageChanged: (value) {
+                        homeController.bottomNavigationPosition.value = value;
+                      },
+                      controller: homeController.homePageController,
                       children: const [
                         HomeContent(),
                         HighLightContent(),

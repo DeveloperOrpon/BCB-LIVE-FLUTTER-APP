@@ -1,13 +1,13 @@
-import 'package:bcb_live_app/provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-import '../pages/watch_youtube_live_page.dart';
+import '../controller/home_controller.dart';
+import '../pages/live_stream_page.dart';
 
 class CustomBottomWidget extends StatelessWidget {
-  final HomeProvider homeProvider;
-  const CustomBottomWidget({Key? key, required this.homeProvider})
+  final HomeController homeController;
+  const CustomBottomWidget({Key? key, required this.homeController})
       : super(key: key);
 
   @override
@@ -38,10 +38,10 @@ class CustomBottomWidget extends StatelessWidget {
               margin: const EdgeInsets.only(top: 15),
               child: FloatingActionButton(
                 onPressed: () {
-                  // Get.to(const LiveStreamPage(),
-                  //     transition: Transition.rightToLeftWithFade);
-                  Get.to(const WatchYoutubeLiveStream(),
-                      transition: Transition.fade);
+                  Get.to(const LiveStreamPage(),
+                      transition: Transition.rightToLeftWithFade);
+                  // Get.to(const WatchYoutubeLiveStream(),
+                  //     transition: Transition.fade);
                 },
                 backgroundColor: Colors.red,
                 elevation: 0.1,
@@ -59,75 +59,77 @@ class CustomBottomWidget extends StatelessWidget {
           ),
 
           ///Other bottom nav Options
-          SizedBox(
-            width: Get.width,
-            height: 80,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                  onPressed: () {
-                    homeProvider.homePageController.animateToPage(0,
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.fastLinearToSlowEaseIn);
-                    homeProvider.bottomNavigationPosition = 0;
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/images/home.svg',
-                    height: 60,
-                    color: homeProvider.bottomNavigationPosition == 0
-                        ? Colors.white
-                        : Colors.grey,
+          Obx(() {
+            return SizedBox(
+              width: Get.width,
+              height: 80,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                    onPressed: () {
+                      homeController.homePageController.animateToPage(0,
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.fastLinearToSlowEaseIn);
+                      homeController.bottomNavigationPosition.value = 0;
+                    },
+                    icon: SvgPicture.asset(
+                      'assets/images/home.svg',
+                      height: 60,
+                      color: homeController.bottomNavigationPosition.value == 0
+                          ? Colors.white
+                          : Colors.grey,
+                    ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    homeProvider.homePageController.animateToPage(1,
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.fastLinearToSlowEaseIn);
-                    homeProvider.bottomNavigationPosition = 1;
-                  },
-                  icon: Image.asset(
-                    'assets/images/play_list.png',
-                    color: homeProvider.bottomNavigationPosition == 1
-                        ? Colors.white
-                        : Colors.grey,
+                  IconButton(
+                    onPressed: () {
+                      homeController.homePageController.animateToPage(1,
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.fastLinearToSlowEaseIn);
+                      homeController.bottomNavigationPosition.value = 1;
+                    },
+                    icon: Image.asset(
+                      'assets/images/play_list.png',
+                      color: homeController.bottomNavigationPosition.value == 1
+                          ? Colors.white
+                          : Colors.grey,
+                    ),
                   ),
-                ),
-                Container(width: Get.width * .20),
-                IconButton(
-                  onPressed: () {
-                    homeProvider.homePageController.animateToPage(2,
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.fastLinearToSlowEaseIn);
-                    homeProvider.bottomNavigationPosition = 2;
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/images/notification.svg',
-                    height: 30,
-                    color: homeProvider.bottomNavigationPosition == 2
-                        ? Colors.white
-                        : Colors.grey,
+                  Container(width: Get.width * .20),
+                  IconButton(
+                    onPressed: () {
+                      homeController.homePageController.animateToPage(2,
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.fastLinearToSlowEaseIn);
+                      homeController.bottomNavigationPosition.value = 2;
+                    },
+                    icon: SvgPicture.asset(
+                      'assets/images/notification.svg',
+                      height: 30,
+                      color: homeController.bottomNavigationPosition.value == 2
+                          ? Colors.white
+                          : Colors.grey,
+                    ),
                   ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    homeProvider.homePageController.animateToPage(3,
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.fastLinearToSlowEaseIn);
-                    homeProvider.bottomNavigationPosition = 3;
-                  },
-                  icon: SvgPicture.asset(
-                    'assets/images/user.svg',
-                    height: 60,
-                    color: homeProvider.bottomNavigationPosition == 3
-                        ? Colors.white
-                        : Colors.grey,
-                  ),
-                )
-              ],
-            ),
-          )
+                  IconButton(
+                    onPressed: () {
+                      homeController.homePageController.animateToPage(3,
+                          duration: const Duration(milliseconds: 600),
+                          curve: Curves.fastLinearToSlowEaseIn);
+                      homeController.bottomNavigationPosition.value = 3;
+                    },
+                    icon: SvgPicture.asset(
+                      'assets/images/user.svg',
+                      height: 60,
+                      color: homeController.bottomNavigationPosition.value == 3
+                          ? Colors.white
+                          : Colors.grey,
+                    ),
+                  )
+                ],
+              ),
+            );
+          })
         ],
       ),
     );

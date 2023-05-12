@@ -1,14 +1,11 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:bcb_live_app/pages/home_page.dart';
-import 'package:bcb_live_app/provider/Live_provider.dart';
-import 'package:bcb_live_app/provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -18,13 +15,7 @@ Future<void> main() async {
     ),
   );
 
-  runApp(MultiProvider(
-    providers: [
-      ChangeNotifierProvider(create: (context) => HomeProvider()),
-      ChangeNotifierProvider(create: (context) => LiveStreamProvider()),
-    ],
-    child: const MyApp(),
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

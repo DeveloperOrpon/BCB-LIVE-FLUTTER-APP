@@ -1,19 +1,21 @@
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:get/get.dart';
 import 'package:video_player/video_player.dart';
 
-class LiveStreamProvider extends ChangeNotifier {
+class LiveController extends GetxController {
   ChewieController? chewieController;
   final videoPlayerController = VideoPlayerController.network(
-      'http://123.253.37.58/hls/stream106984.m3u8',
-      httpHeaders: {"Authorization": "Basic Y3JpY2tldDpjcmlja2V0NzE="},
+      // 'http://123.253.37.58/hls/stream106984.m3u8',
+      // httpHeaders: {"Authorization": "Basic Y3JpY2tldDpjcmlja2V0NzE="},
       //base64)=(user:pass)
-
+      'http://103.199.161.254/Content/bbcworld/Live/Channel(BBCworld)/index.m3u8',
       formatHint: VideoFormat.hls,
       videoPlayerOptions: VideoPlayerOptions());
 
-  intVideo() {
+  @override
+  void onInit() {
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
       aspectRatio: 16 / 9,
@@ -41,19 +43,9 @@ class LiveStreamProvider extends ChangeNotifier {
                   controller.repeat();
                 })
                 .scaleXY(end: 1.1, duration: 600.ms)
-                .then(delay: 5.seconds)
+                .then(delay: GetNumUtils(5).seconds)
                 .scaleXY(end: 1 / 1.1),
           ),
-          // child: ElevatedButton(
-          //     style: ElevatedButton.styleFrom(
-          //       backgroundColor: appPrimary,
-          //     ),
-          //     onPressed: () {
-          //       if (!chewieController!.isPlaying) {
-          //         intVideo();
-          //       } else {}
-          //     },
-          //     child: const Text("Stream Offline")),
         );
       },
     );
@@ -61,5 +53,6 @@ class LiveStreamProvider extends ChangeNotifier {
     if (chewieController!.isPlaying) {
       chewieController!.seekTo(const Duration(days: 30));
     }
+    super.onInit();
   }
 }

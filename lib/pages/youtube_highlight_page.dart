@@ -1,11 +1,12 @@
 import 'package:bcb_live_app/custom_widget/titleAppBar.dart';
-import 'package:bcb_live_app/provider/home_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../controller/home_controller.dart';
 import '../custom_widget/highlight_cart_ui.dart';
+import '../custom_widget/miniBottomBar.dart';
 import '../utils/demo_data.dart';
 
 class YoutubeHighlightPage extends StatelessWidget {
@@ -15,61 +16,63 @@ class YoutubeHighlightPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeProvider>(builder: (context, homeProvider, child) {
-      return YoutubePlayerBuilder(
-          player: YoutubePlayer(
-            aspectRatio: 16 / 9,
-            controller: homeProvider.youtubePlayerController,
-            progressIndicatorColor: Colors.red,
-            showVideoProgressIndicator: true,
-            bottomActions: [
-              CurrentPosition(),
-              FullScreenButton(
-                controller: homeProvider.youtubePlayerController,
-                color: Colors.pink,
+    return GetBuilder(
+        init: HomeController(),
+        builder: (homeController) {
+          return YoutubePlayerBuilder(
+              player: YoutubePlayer(
+                aspectRatio: 16 / 9,
+                controller: homeController.youtubePlayerController,
+                progressIndicatorColor: Colors.red,
+                showVideoProgressIndicator: true,
+                bottomActions: [
+                  CurrentPosition(),
+                  FullScreenButton(
+                    controller: homeController.youtubePlayerController,
+                    color: Colors.pink,
+                  ),
+                ],
+                onReady: () {},
               ),
-            ],
-            onReady: () {},
-          ),
-          builder: (context, player) {
-            return Scaffold(
-              body: SafeArea(
-                child: Stack(
-                  children: [
-                    Column(
+              builder: (context, player) {
+                return Scaffold(
+                  body: SafeArea(
+                    child: Stack(
                       children: [
-                        const TitleAppBar(),
-                        Expanded(
-                            child: AnimationLimiter(
-                          child: ListView.builder(
-                            physics: const ScrollPhysics(),
-                            itemCount: items.length,
-                            itemBuilder: (context, index) =>
-                                AnimationConfiguration.staggeredList(
-                              position: index,
-                              duration: const Duration(milliseconds: 700),
-                              child: SlideAnimation(
-                                horizontalOffset: 50.0,
-                                child: FadeInAnimation(
-                                  child: HighlightCartUi(
-                                    youtubePlayerController:
-                                        homeProvider.youtubePlayerController,
-                                    highlight: items[index],
-                                    homeProvider: homeProvider,
+                        Column(
+                          children: [
+                            const TitleAppBar(),
+                            Expanded(
+                                child: AnimationLimiter(
+                              child: ListView.builder(
+                                physics: const ScrollPhysics(),
+                                itemCount: items.length,
+                                itemBuilder: (context, index) =>
+                                    AnimationConfiguration.staggeredList(
+                                  position: index,
+                                  duration: const Duration(milliseconds: 700),
+                                  child: SlideAnimation(
+                                    horizontalOffset: 50.0,
+                                    child: FadeInAnimation(
+                                      child: HighlightCartUi(
+                                        youtubePlayerController: homeController
+                                            .youtubePlayerController,
+                                        highlight: items[index],
+                                        homeController: homeController,
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ))
+                            ))
+                          ],
+                        ),
+                        const MiniBottomBar()
                       ],
                     ),
-                    //const MiniBottomBar()
-                  ],
-                ),
-              ),
-            );
-          });
-    });
+                  ),
+                );
+              });
+        });
   }
 }
