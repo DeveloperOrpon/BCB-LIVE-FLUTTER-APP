@@ -1,16 +1,14 @@
 import 'dart:ui';
-
-import 'package:bcb_live_app/pages/profile_page.dart';
-import 'package:bcb_live_app/pages/schedule_page.dart';
-import 'package:bcb_live_app/utils/app_const.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../controller/home_controller.dart';
 import '../custom_widget/custom_bottom_widget.dart';
 import '../custom_widget/main_appbar.dart';
+import '../utils/app_const.dart';
 import 'highlight_content.dart';
 import 'home_content.dart';
+import 'profile_page.dart';
+import 'schedule_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);

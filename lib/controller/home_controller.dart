@@ -16,6 +16,7 @@ class HomeController extends GetxController {
             disableDragSeek: false,
             useHybridComposition: true,
             captionLanguage: 'en',
+            isLive: true,
             forceHD: true,
           ));
 

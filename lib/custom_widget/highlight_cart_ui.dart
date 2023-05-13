@@ -1,11 +1,12 @@
-import 'package:bcb_live_app/controller/home_controller.dart';
-import 'package:bcb_live_app/utils/testStyle.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:miniplayer/miniplayer.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
+import '../controller/home_controller.dart';
 import '../utils/demo_data.dart';
+import '../utils/testStyle.dart';
 
 class HighlightCartUi extends StatelessWidget {
   final YoutubePlayerController youtubePlayerController;

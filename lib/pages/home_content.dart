@@ -1,12 +1,12 @@
-import 'package:bcb_live_app/controller/home_controller.dart';
-import 'package:bcb_live_app/pages/youtube_highlight_page.dart';
-import 'package:bcb_live_app/utils/demo_data.dart';
+import 'package:bcb_live_app/pages/player_page.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
 
+import '../controller/home_controller.dart';
 import '../custom_widget/today_match_widget.dart';
+import '../utils/demo_data.dart';
 
 class HomeContent extends StatelessWidget {
   const HomeContent({Key? key}) : super(key: key);
@@ -35,13 +35,14 @@ class HomeContent extends StatelessWidget {
                 ),
               ),
               Column(
-                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.max,
                 children: [
                   Stack(
                     children: [
                       CarouselSlider(
                         options: CarouselOptions(
-                          height: 320.0,
+                          height: 320,
                           autoPlay: true,
                           autoPlayInterval: const Duration(seconds: 3),
                           autoPlayAnimationDuration:
@@ -53,18 +54,21 @@ class HomeContent extends StatelessWidget {
                           return InkWell(
                             onTap: () {
                               //startLoading("Wait");
-                              Get.to(
-                                const YoutubeHighlightPage(),
-                                arguments: i,
-                                transition: Transition.fadeIn,
-                              );
+                              // Get.to(
+                              //   const YoutubeHighlightPage(),
+                              //   arguments: i,
+                              //   transition: Transition.fadeIn,
+                              // );
+                              homeController.selectHighlight.value = i;
+                              Get.to(const PlayerPage(),
+                                  transition: Transition.leftToRightWithFade);
                             },
                             child: Column(
                               children: [
                                 Stack(
                                   children: [
                                     Container(
-                                      height: 210,
+                                      height: 217,
                                       width: Get.width,
                                       margin: const EdgeInsets.symmetric(),
                                       child: ClipRRect(

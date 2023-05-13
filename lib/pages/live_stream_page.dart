@@ -2,12 +2,10 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
-
 import '../controller/live_controller.dart';
 
 class LiveStreamPage extends StatefulWidget {
   const LiveStreamPage({Key? key}) : super(key: key);
-
   @override
   State<LiveStreamPage> createState() => _LiveStreamPageState();
 }
@@ -34,7 +32,7 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
               width: Get.width,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/BG-1.jpg"))),
+                      image: AssetImage("assets/images/BG-1.jpg"),fit: BoxFit.fill)),
               child: Column(
                 children: [
                   SizedBox(

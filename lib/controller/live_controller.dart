@@ -29,7 +29,7 @@ class LiveController extends GetxController {
           alignment: Alignment.bottomCenter,
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/ads/live-logo.jpg"),
+                image: AssetImage("assets/ads/coming-soon.gif"),
                 fit: BoxFit.cover),
           ),
           child: Padding(

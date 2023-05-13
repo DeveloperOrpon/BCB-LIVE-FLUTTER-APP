@@ -1,6 +1,4 @@
 import 'dart:async';
-
-import 'package:bcb_live_app/utils/app_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
@@ -8,6 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:simple_ripple_animation/simple_ripple_animation.dart';
 
 import '../pages/live_stream_page.dart';
+import '../utils/app_const.dart';
 
 class MainAppbar extends StatelessWidget {
   const MainAppbar({Key? key}) : super(key: key);
@@ -89,31 +88,31 @@ class MainAppbar extends StatelessWidget {
               ],
             ),
           ),
-          const SizedBox(width: 10),
-          InkWell(
-            onTap: () {
-              Get.to(const LiveStreamPage(),
-                  transition: Transition.rightToLeftWithFade);
-              // Get.to(const WatchYoutubeLiveStream(),
-              //     transition: Transition.fade);
-            },
-            child: const RippleAnimation(
-              color: Colors.redAccent,
-              delay: Duration(milliseconds: 300),
-              repeat: true,
-              minRadius: 26,
-              ripplesCount: 4,
-              child: CircleAvatar(
-                backgroundColor: Colors.red,
-                radius: 25,
-                child: Icon(
-                  Icons.live_tv_sharp,
-                  color: Colors.white,
-                  size: 30,
-                ),
-              ),
-            ),
-          ),
+          // const SizedBox(width: 10),
+          // InkWell(
+          //   onTap: () {
+          //     Get.to(const LiveStreamPage(),
+          //         transition: Transition.rightToLeftWithFade);
+          //     // Get.to(const WatchYoutubeLiveStream(),
+          //     //     transition: Transition.fade);
+          //   },
+          //   child: const RippleAnimation(
+          //     color: Colors.redAccent,
+          //     delay: Duration(milliseconds: 300),
+          //     repeat: true,
+          //     minRadius: 26,
+          //     ripplesCount: 4,
+          //     child: CircleAvatar(
+          //       backgroundColor: Colors.red,
+          //       radius: 25,
+          //       child: Icon(
+          //         Icons.live_tv_sharp,
+          //         color: Colors.white,
+          //         size: 30,
+          //       ),
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );
