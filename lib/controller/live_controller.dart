@@ -1,21 +1,51 @@
+import 'dart:developer';
+
 import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:get/get.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:video_player/video_player.dart';
 
 class LiveController extends GetxController {
   ChewieController? chewieController;
-  final videoPlayerController = VideoPlayerController.network(
-      // 'http://123.253.37.58/hls/stream106984.m3u8',
-      // httpHeaders: {"Authorization": "Basic Y3JpY2tldDpjcmlja2V0NzE="},
-      //base64)=(user:pass)
-      'http://103.199.161.254/Content/bbcworld/Live/Channel(BBCworld)/index.m3u8',
-      formatHint: VideoFormat.hls,
-      videoPlayerOptions: VideoPlayerOptions());
+  RxBool isLive = false.obs;
+  RxString liveLink = ''.obs;
 
   @override
   void onInit() {
+    refreshLiveSwitcher();
+    super.onInit();
+  }
+
+  void refreshLiveSwitcher() async {
+    log('refreshLiveSwitcher()');
+    SupabaseClient supaBase = Supabase.instance.client;
+    var getBool = await supaBase
+        .from("stream_links")
+        .select("is_live")
+        .match({"stream_name": "test"})
+        .limit(1)
+        .single();
+
+    var getString = await supaBase
+        .from("stream_links")
+        .select("stream_link")
+        .match({"stream_name": "test"})
+        .limit(1)
+        .single();
+    liveLink.value = getString['stream_link'];
+    isLive.value = getBool['is_live'];
+  }
+
+  void intController() {
+    final videoPlayerController = VideoPlayerController.network(
+        // 'http://123.253.37.58/hls/stream106984.m3u8',
+        // httpHeaders: {"Authorization": "Basic Y3JpY2tldDpjcmlja2V0NzE="},
+        //base64)=(user:pass)
+        liveLink.value,
+        formatHint: VideoFormat.hls,
+        videoPlayerOptions: VideoPlayerOptions());
     chewieController = ChewieController(
       videoPlayerController: videoPlayerController,
       aspectRatio: 16 / 9,
@@ -53,6 +83,5 @@ class LiveController extends GetxController {
     if (chewieController!.isPlaying) {
       chewieController!.seekTo(const Duration(days: 30));
     }
-    super.onInit();
   }
 }

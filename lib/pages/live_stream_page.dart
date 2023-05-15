@@ -2,6 +2,7 @@ import 'package:chewie/chewie.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+
 import '../controller/live_controller.dart';
 
 class LiveStreamPage extends StatefulWidget {
@@ -16,6 +17,7 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
     return GetBuilder(
       init: LiveController(),
       builder: (liveStreamController) {
+        liveStreamController.intController();
         if (liveStreamController.chewieController == null) {
           return const SpinKitWave(
             color: Colors.red,
@@ -32,7 +34,8 @@ class _LiveStreamPageState extends State<LiveStreamPage> {
               width: Get.width,
               decoration: const BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage("assets/images/BG-1.jpg"),fit: BoxFit.fill)),
+                      image: AssetImage("assets/images/BG-1.jpg"),
+                      fit: BoxFit.fill)),
               child: Column(
                 children: [
                   SizedBox(

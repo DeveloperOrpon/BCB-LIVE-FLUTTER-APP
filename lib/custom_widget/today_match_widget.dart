@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../pages/watch_youtube_live_page.dart';
-
 class TodayMatchWidget extends StatelessWidget {
   const TodayMatchWidget({Key? key}) : super(key: key);
 
@@ -10,7 +8,7 @@ class TodayMatchWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Get.to(const WatchYoutubeLiveStream(), transition: Transition.fade);
+        //Get.to(const WatchYoutubeLiveStream(), transition: Transition.fade);
       },
       child: Stack(
         alignment: Alignment.center,

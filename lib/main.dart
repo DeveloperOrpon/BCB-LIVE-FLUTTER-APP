@@ -6,9 +6,16 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Supabase.initialize(
+      url: "https://lyknfaiyybiqhajeijfi.supabase.co",
+      anonKey:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imx5a25mYWl5eWJpcWhhamVpamZpIiwicm9sZSI6ImFub24iLCJpYXQiOjE2ODQwMDAwNzIsImV4cCI6MTk5OTU3NjA3Mn0.RWpI2lgWZ-_QPCgq1aLgEya5iXDWHAjdHuZovzgvLqI");
+
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Color(0xff1a1726),
